@@ -1,0 +1,171 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubemq-view
+  namespace: kubemq
+  labels:
+    app: kubemq-view
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kubemq-view
+  template:
+    metadata:
+      name: kubemq-view
+      labels:
+        app: kubemq-view
+    spec:
+      containers:
+        - name: prometheus
+          image: prom/prometheus
+          args:
+            - "--config.file=/etc/prometheus/prometheus.yml"
+            - "--storage.tsdb.path=/prometheus/"
+          ports:
+            - containerPort: 9090
+          volumeMounts:
+            - name: kubemq-view-config-prometheus
+              mountPath: /etc/prometheus/prometheus.yaml
+              subPath: prometheus.yaml
+            - name: prometheus-storage-volume
+              mountPath: /prometheus/
+        - name: grafana
+          image: grafana/grafana:latest
+          ports:
+            - name: grafana
+              containerPort: 3000
+          volumeMounts:
+            - mountPath: /var/lib/grafana
+              name: grafana-storage
+            - mountPath: /etc/grafana/provisioning/datasources/prometheus.yaml
+              name: kubemq-view-data-source-grafana
+              subPath: prometheus.yaml
+            - mountPath: /etc/grafana/grafana.ini
+              name: kubemq-view-config-grafana
+              subPath: grafana.ini
+      volumes:
+        - name: prometheus-storage-volume
+          emptyDir: {}
+        - name: grafana-storage
+          emptyDir: {}
+        - name: kubemq-view-config-grafana
+          configMap:
+            name: kubemq-view-config
+            items:
+              - key: config_grafana.ini
+                path: grafana.ini
+        - name: kubemq-view-data-source-grafana
+          configMap:
+            name: kubemq-view-config
+            items:
+              - key: data_source_prometheus.yaml
+                path: prometheus.yaml
+        - name: kubemq-view-config-prometheus
+          configMap:
+            name: kubemq-view-config
+            items:
+              - key: config_prometheus.yml
+                path: prometheus.yaml
+
+
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: prometheus
+rules:
+  - apiGroups: [""]
+    resources:
+      - nodes
+      - nodes/proxy
+      - services
+      - endpoints
+      - pods
+    verbs: ["get", "list", "watch"]
+  - apiGroups:
+      - extensions
+    resources:
+      - ingresses
+    verbs: ["get", "list", "watch"]
+  - nonResourceURLs: ["/metrics"]
+    verbs: ["get"]
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: prometheus
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: prometheus
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: kubemq
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubemq-view-config
+  namespace: kubemq
+data:
+  config_prometheus.yml: |-
+    global:
+      scrape_interval: 5s
+      evaluation_interval: 5s
+    scrape_configs:
+    - job_name: scrape_kubemq
+      kubernetes_sd_configs:
+      - role: pod
+        namespaces:
+          names:
+          - "kubemq"
+      relabel_configs:
+      - source_labels: [__meta_kubernetes_pod_container_port_number]
+        action: keep
+        regex: 8\d{3}
+  config_grafana.ini: |-
+    [auth.anonymous]
+    # enable anonymous access
+    enabled = true
+    org_role = Admin
+  data_source_prometheus.yaml: |-
+    {
+        "apiVersion": 1,
+        "datasources": [
+            {
+               "access":"proxy",
+                "editable": false,
+                "name": "prometheus",
+                "isDefault": true,
+                "orgId": 1,
+                "type": "prometheus",
+                "url": "http://localhost:9090",
+                "version": 1
+            }
+        ]
+    }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubemq-view
+  namespace: kubemq
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/port:   '3000'
+spec:
+  selector:
+    app: kubemq-view
+  type: NodePort
+  ports:
+    - port: 3000
+      name: grafana
+      targetPort: 3000
+      nodePort: 32000
+    - port: 8080
+      name: prometheus
+      targetPort: 9090
+      nodePort: 30000
+---
