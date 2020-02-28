@@ -26,8 +26,8 @@ spec:
             - containerPort: 9090
           volumeMounts:
             - name: kubemq-view-config-prometheus
-              mountPath: /etc/prometheus/prometheus.yaml
-              subPath: prometheus.yaml
+              mountPath: /etc/prometheus/prometheus.yml
+              subPath: prometheus.yml
             - name: prometheus-storage-volume
               mountPath: /prometheus/
         - name: grafana
@@ -63,12 +63,11 @@ spec:
                 path: prometheus.yaml
         - name: kubemq-view-config-prometheus
           configMap:
+            defaultMode: 420
             name: kubemq-view-config
             items:
               - key: config_prometheus.yml
-                path: prometheus.yaml
-
-
+                path: prometheus.yml
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
@@ -125,6 +124,36 @@ data:
       - source_labels: [__meta_kubernetes_pod_container_port_number]
         action: keep
         regex: 8\d{3}
+    - job_name: 'kubernetes-cadvisor'
+
+      # Default to scraping over https. If required, just disable this or change to
+      # `http`.
+      scheme: https
+
+      # This TLS & bearer token file config is used to connect to the actual scrape
+      # endpoints for cluster components. This is separate to discovery auth
+      # configuration because discovery & scraping are two separate concerns in
+      # Prometheus. The discovery auth config is automatic if Prometheus runs inside
+      # the cluster. Otherwise, more config options have to be provided within the
+      # <kubernetes_sd_config>.
+      tls_config:
+        ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+
+      kubernetes_sd_configs:
+      - role: node
+        namespaces:
+          names:
+          - "kubemq"
+      relabel_configs:
+      - action: labelmap
+        regex: __meta_kubernetes_node_label_(.+)
+      - target_label: __address__
+        replacement: kubernetes.default.svc:443
+      - source_labels: [__meta_kubernetes_node_name]
+        regex: (.+)
+        target_label: __metrics_path__
+        replacement: /api/v1/nodes/${1}/proxy/metrics/cadvisor
   config_grafana.ini: |-
     [auth.anonymous]
     # enable anonymous access
