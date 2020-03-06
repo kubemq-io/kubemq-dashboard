@@ -19,7 +19,7 @@ spec:
       serviceAccountName: kubemq-operator
       containers:
         - name: prometheus
-          image: prom/prometheus
+          image: prom/prometheus:latest
           args:
             - "--config.file=/etc/prometheus/prometheus.yml"
             - "--storage.tsdb.path=/prometheus/"
@@ -45,6 +45,12 @@ spec:
             - mountPath: /etc/grafana/grafana.ini
               name: kubemq-view-config-grafana
               subPath: grafana.ini
+            - mountPath: /etc/grafana/provisioning/dashboards/all.yaml
+              name: kubemq-view-dashboard-provision-grafana
+              subPath: all.yaml
+            - mountPath: /etc/grafana/dashboards/kubemq_dashboard.json
+              name: kubemq-view-dashboard-grafana
+              subPath: kubemq_dashboard.json
       volumes:
         - name: prometheus-storage-volume
           emptyDir: {}
@@ -52,62 +58,40 @@ spec:
           emptyDir: {}
         - name: kubemq-view-config-grafana
           configMap:
-            name: kubemq-view-config
+            name: kubemq-view
             items:
               - key: config_grafana.ini
                 path: grafana.ini
         - name: kubemq-view-data-source-grafana
           configMap:
-            name: kubemq-view-config
+            name: kubemq-view
             items:
               - key: data_source_prometheus.yaml
                 path: prometheus.yaml
         - name: kubemq-view-config-prometheus
           configMap:
             defaultMode: 420
-            name: kubemq-view-config
+            name: kubemq-view
             items:
               - key: config_prometheus.yml
                 path: prometheus.yml
----
-#apiVersion: rbac.authorization.k8s.io/v1beta1
-#kind: ClusterRole
-#metadata:
-#  name: prometheus
-#rules:
-#  - apiGroups: [""]
-#    resources:
-#      - nodes
-#      - nodes/proxy
-#      - services
-#      - endpoints
-#      - pods
-#    verbs: ["get", "list", "watch"]
-#  - apiGroups:
-#      - extensions
-#    resources:
-#      - ingresses
-#    verbs: ["get", "list", "watch"]
-#  - nonResourceURLs: ["/metrics"]
-#    verbs: ["get"]
-#---
-#apiVersion: rbac.authorization.k8s.io/v1beta1
-#kind: ClusterRoleBinding
-#metadata:
-#  name: prometheus
-#roleRef:
-#  apiGroup: rbac.authorization.k8s.io
-#  kind: ClusterRole
-#  name: prometheus
-#subjects:
-#  - kind: ServiceAccount
-#    name: default
-#    namespace: kubemq
+        - name: kubemq-view-dashboard-provision-grafana
+          configMap:
+            name: kubemq-view
+            items:
+              - key: dashboard_provision.yaml
+                path: all.yaml
+        - name: kubemq-view-dashboard-grafana
+          configMap:
+            name: kubemq-view
+            items:
+              - key: kubemq_dashboard.json
+                path: kubemq_dashboard.json
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: kubemq-view-config
+  name: kubemq-view
   namespace: kubemq
 data:
   config_prometheus.yml: |-
@@ -126,17 +110,6 @@ data:
         action: keep
         regex: 8\d{3}
     - job_name: 'kubernetes-cadvisor'
-
-      # Default to scraping over https. If required, just disable this or change to
-      # `http`.
-      scheme: https
-
-      # This TLS & bearer token file config is used to connect to the actual scrape
-      # endpoints for cluster components. This is separate to discovery auth
-      # configuration because discovery & scraping are two separate concerns in
-      # Prometheus. The discovery auth config is automatic if Prometheus runs inside
-      # the cluster. Otherwise, more config options have to be provided within the
-      # <kubernetes_sd_config>.
       tls_config:
         ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
       bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
@@ -145,7 +118,7 @@ data:
       - role: node
         namespaces:
           names:
-          - "kubemq"
+          - "default"
       relabel_configs:
       - action: labelmap
         regex: __meta_kubernetes_node_label_(.+)
@@ -176,6 +149,15 @@ data:
             }
         ]
     }
+  dashboard_provision.yaml: |-
+    - name: 'default'
+      org_id: 1
+      folder: ''
+      type: 'file'
+      options:
+        folder: '/etc/grafana/dashboards'
+  kubemq_dashboard.json: |-
+    {}
 ---
 apiVersion: v1
 kind: Service
