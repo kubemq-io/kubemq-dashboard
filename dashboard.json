@@ -921,7 +921,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "semi-dark-yellow",
+                  "color": "semi-dark-green",
                   "value": null
                 }
               ]
@@ -1166,7 +1166,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "semi-dark-purple",
+                  "color": "semi-dark-orange",
                   "value": null
                 }
               ]
