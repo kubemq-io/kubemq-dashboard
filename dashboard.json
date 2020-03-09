@@ -3146,7 +3146,7 @@
       ],
       "targets": [
         {
-          "expr": "sum(increase(kubemq_messages_count{type=\"events_store\"}[$__range])) by(channel,side) ",
+          "expr": "sum(rate(kubemq_messages_count{type=\"events_store\"}[$__range])) by(channel,side) ",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -3154,7 +3154,7 @@
           "refId": "B"
         },
         {
-          "expr": "sum(increase(kubemq_messages_volume{type=\"events_store\"}[$__range])) by(channel,side) ",
+          "expr": "sum(rate(kubemq_messages_volume{type=\"events_store\"}[$__range])) by(channel,side) ",
           "format": "table",
           "hide": false,
           "instant": true,
