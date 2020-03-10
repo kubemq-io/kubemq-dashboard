@@ -5194,7 +5194,7 @@
     "list": []
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {
@@ -5214,5 +5214,5 @@
   "timezone": "",
   "title": "Kubemq Dashboard",
   "uid": "2dgpeiuWk",
-  "version": 12
+  "version": 1
 }
