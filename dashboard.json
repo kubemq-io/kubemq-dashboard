@@ -5186,7 +5186,7 @@
       "type": "table"
     }
   ],
-  "refresh": "",
+  "refresh": "10s",
   "schemaVersion": 22,
   "style": "dark",
   "tags": [],
