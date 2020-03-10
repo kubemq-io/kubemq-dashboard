@@ -1,0 +1,9 @@
+groups:
+  - name: aggrigating
+    rules:
+      - record: kubemq:messages:count:side:type
+        expr: sum(kubemq_messages_count{}) by (side,type)
+      - record: kubemq:messages:volume:side:type
+        expr: sum(kubemq_messages_volume{}*8)  by (side,type)
+      - record: kubemq:errors:count:side:type
+        expr: sum(kubemq_errors_count{}) by (side,type)
