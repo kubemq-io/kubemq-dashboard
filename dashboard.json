@@ -72,7 +72,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "sum(max_over_time(kubemq:messages:count:side:type{type=\"events\"}[$__range])-min_over_time(kubemq:messages:count:side:type{type=\"events\"}[$__range])) OR on() vector(0)",
+          "expr": "max_over_time(kubemq:messages:count:events:sum[$__range])-min_over_time(kubemq:messages:count:events:sum[$__range])",
           "refId": "A"
         }
       ],
@@ -119,7 +119,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "sum(max_over_time(kubemq:messages:count:side:type{type=\"events_store\"}[$__range])-min_over_time(kubemq:messages:count:side:type{type=\"events_store\"}[$__range])) OR on() vector(0)",
+          "expr": "max_over_time(kubemq:messages:count:events_store:sum[$__range])-min_over_time(kubemq:messages:count:events_store:sum[$__range])",
           "refId": "A"
         }
       ],
@@ -142,7 +142,7 @@
         "colorMode": "value",
         "fieldOptions": {
           "calcs": [
-            "last"
+            "max"
           ],
           "defaults": {
             "mappings": [],
@@ -166,14 +166,14 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "sum(max_over_time(kubemq:messages:count:side:type{type=\"queues\"}[$__range])-min_over_time(kubemq:messages:count:side:type{type=\"queues\"}[$__range])) OR on() vector(0)",
+          "expr": "max_over_time(kubemq:messages:count:queues:sum[$__range])-min_over_time(kubemq:messages:count:queues:sum[$__range])",
           "instant": false,
           "refId": "A"
         }
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Total Queues Messages",
+      "title": "Total Queue Messages",
       "type": "stat"
     },
     {
@@ -214,13 +214,13 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "sum(max_over_time(kubemq:messages:count:side:type{type=\"queries\"}[$__range])-min_over_time(kubemq:messages:count:side:type{type=\"queries\"}[$__range])) OR on() vector(0)",
+          "expr": "max_over_time(kubemq:messages:count:queries:sum[$__range])-min_over_time(kubemq:messages:count:queries:sum[$__range])",
           "refId": "A"
         }
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Total Queries Requests",
+      "title": "Total Queries Messages",
       "type": "stat"
     },
     {
@@ -261,13 +261,13 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "sum(max_over_time(kubemq:messages:count:side:type{type=\"commands\"}[$__range])-min_over_time(kubemq:messages:count:side:type{type=\"commands\"}[$__range])) OR on() vector(0)",
+          "expr": "max_over_time(kubemq:messages:count:commands:sum[$__range])-min_over_time(kubemq:messages:count:commands:sum[$__range])",
           "refId": "A"
         }
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Total Commands Request",
+      "title": "Total Commands Messages",
       "type": "stat"
     },
     {
@@ -308,13 +308,13 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "sum(max_over_time(kubemq:messages:count:side:type{type=\"responses\"}[$__range])-min_over_time(kubemq:messages:count:side:type{type=\"responses\"}[$__range])) OR on() vector(0)",
+          "expr": "max_over_time(kubemq:messages:count:responses:sum[$__range])-min_over_time(kubemq:messages:count:responses:sum[$__range])",
           "refId": "A"
         }
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Total Responses",
+      "title": "Total Responses Messages",
       "type": "stat"
     },
     {
@@ -357,7 +357,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "sum(max_over_time(kubemq:messages:volume:side:type{type=\"events\"}[$__range])-min_over_time(kubemq:messages:volume:side:type{type=\"events\"}[$__range])) /8 OR on() vector(0)",
+          "expr": "max_over_time(kubemq:messages:volume:events:sum[$__range])-min_over_time(kubemq:messages:volume:events:sum[$__range])",
           "refId": "A"
         }
       ],
@@ -405,7 +405,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "sum(max_over_time(kubemq:messages:volume:side:type{type=\"events_store\"}[$__range])-min_over_time(kubemq:messages:volume:side:type{type=\"events_store\"}[$__range])) /8 OR on() vector(0)",
+          "expr": "max_over_time(kubemq:messages:volume:events_store:sum[$__range])-min_over_time(kubemq:messages:volume:events_store:sum[$__range])",
           "refId": "A"
         }
       ],
@@ -453,7 +453,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "sum(max_over_time(kubemq:messages:volume:side:type{type=\"queues\"}[$__range])-min_over_time(kubemq:messages:volume:side:type{type=\"queues\"}[$__range]))/8 OR on() vector(0)",
+          "expr": "max_over_time(kubemq:messages:volume:queues:sum[$__range])-min_over_time(kubemq:messages:volume:queues:sum[$__range])",
           "refId": "A"
         }
       ],
@@ -501,7 +501,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "sum(max_over_time(kubemq:messages:volume:side:type{type=\"queries\"}[$__range])-min_over_time(kubemq:messages:volume:side:type{type=\"queries\"}[$__range])) / 8 OR on() vector(0)",
+          "expr": "max_over_time(kubemq:messages:volume:queries:sum[$__range])-min_over_time(kubemq:messages:volume:queries:sum[$__range])",
           "refId": "A"
         }
       ],
@@ -549,7 +549,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "sum(max_over_time(kubemq:messages:volume:side:type{type=\"commands\"}[$__range])-min_over_time(kubemq:messages:volume:side:type{type=\"commands\"}[$__range])) /8 OR on() vector(0)",
+          "expr": "max_over_time(kubemq:messages:volume:commands:sum[$__range])-min_over_time(kubemq:messages:volume:commands:sum[$__range])",
           "refId": "A"
         }
       ],
@@ -597,13 +597,13 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "sum(max_over_time(kubemq:messages:volume:side:type{type=\"responses\"}[$__range])-min_over_time(kubemq:messages:volume:side:type{type=\"responses\"}[$__range])) /8 OR on() vector(0)",
+          "expr": "max_over_time(kubemq:messages:volume:responses:sum[$__range])-min_over_time(kubemq:messages:volume:responses:sum[$__range])",
           "refId": "A"
         }
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Total Response Volume",
+      "title": "Total Responses Volume",
       "type": "stat"
     },
     {
@@ -646,7 +646,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "sum(max_over_time(kubemq:errors:count:side:type{type=\"events\"}[$__range])-min_over_time(kubemq:errors:count:side:type{type=\"events\"}[$__range])) OR on() vector(0)",
+          "expr": "max_over_time(kubemq:messages:errors:events:sum[$__range])-min_over_time(kubemq:messages:errors:events:sum[$__range])",
           "refId": "A"
         }
       ],
@@ -695,7 +695,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "sum(max_over_time(kubemq:errors:count:side:type{type=\"events_store\"}[$__range])-min_over_time(kubemq:errors:count:side:type{type=\"events_store\"}[$__range])) OR on() vector(0)",
+          "expr": "max_over_time(kubemq:messages:errors:events_store:sum[$__range])-min_over_time(kubemq:messages:errors:events_store:sum[$__range])",
           "refId": "A"
         }
       ],
@@ -744,7 +744,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "sum(max_over_time(kubemq:errors:count:side:type{type=\"queues\"}[$__range])-min_over_time(kubemq:errors:count:side:type{type=\"queues\"}[$__range])) OR on() vector(0)",
+          "expr": "max_over_time(kubemq:messages:errors:queues:sum[$__range])-min_over_time(kubemq:messages:errors:queues:sum[$__range])",
           "refId": "A"
         }
       ],
@@ -793,7 +793,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "sum(max_over_time(kubemq:errors:count:side:type{type=\"queries\"}[$__range])-min_over_time(kubemq:errors:count:side:type{type=\"queries\"}[$__range])) OR on() vector(0)",
+          "expr": "max_over_time(kubemq:messages:errors:queries:sum[$__range])-min_over_time(kubemq:messages:errors:queries:sum[$__range])",
           "refId": "A"
         }
       ],
@@ -842,7 +842,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "sum(max_over_time(kubemq:errors:count:side:type{type=\"commands\"}[$__range])-min_over_time(kubemq:errors:count:side:type{type=\"commands\"}[$__range])) OR on() vector(0)",
+          "expr": "max_over_time(kubemq:messages:errors:commands:sum[$__range])-min_over_time(kubemq:messages:errors:commands:sum[$__range]) ",
           "refId": "A"
         }
       ],
@@ -891,13 +891,13 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "sum(max_over_time(kubemq:errors:count:side:type{type=\"responses\"}[$__range])-min_over_time(kubemq:errors:count:side:type{type=\"responses\"}[$__range])) OR on() vector(0)",
+          "expr": "max_over_time(kubemq:messages:errors:responses:sum[$__range])-min_over_time(kubemq:messages:errors:responses:sum[$__range])",
           "refId": "A"
         }
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Total Response Errors",
+      "title": "Total Responses Errors",
       "type": "stat"
     },
     {
@@ -947,27 +947,28 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by ()(rate(kubemq:messages:count:side:type{side=\"send\",type=\"events\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:count:events:send:sum[$__range]) OR on() vector(0))",
+          "instant": false,
           "legendFormat": "Events",
           "refId": "A"
         },
         {
-          "expr": "sum by ()(rate(kubemq:messages:count:side:type{side=\"send\",type=\"events_store\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:count:events_store:send:sum[$__range]) OR on() vector(0))",
           "legendFormat": "Events Store",
           "refId": "B"
         },
         {
-          "expr": "sum by ()(rate(kubemq:messages:count:side:type{side=\"send\",type=\"queues\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:count:queues:send:sum[$__range]) OR on() vector(0))",
           "legendFormat": "Queues",
           "refId": "C"
         },
         {
-          "expr": "sum by ()(rate(kubemq:messages:count:side:type{side=\"send\",type=\"queries\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:count:queries:send:sum[$__range]) OR on() vector(0))",
           "legendFormat": "Queries",
           "refId": "D"
         },
         {
-          "expr": "sum by ()(rate(kubemq:messages:count:side:type{side=\"send\",type=\"commands\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:count:commands:send:sum[$__range]) OR on() vector(0))",
           "legendFormat": "Commands",
           "refId": "E"
         }
@@ -1061,27 +1062,27 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by ()(rate(kubemq:messages:volume:side:type{side=\"send\",type=\"events\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:volume:events:send:sum[$__range]) OR on() vector(0))",
           "legendFormat": "Events",
           "refId": "A"
         },
         {
-          "expr": "sum by ()(rate(kubemq:messages:volume:side:type{side=\"send\",type=\"events_store\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:volume:events_store:send:sum[$__range]) OR on() vector(0))",
           "legendFormat": "Events Store",
           "refId": "B"
         },
         {
-          "expr": "sum by ()(rate(kubemq:messages:volume:side:type{side=\"send\",type=\"queues\"}[$__interval])  OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:volume:queues:send:sum[$__range]) OR on() vector(0))",
           "legendFormat": "Queues",
           "refId": "C"
         },
         {
-          "expr": "sum by ()(rate(kubemq:messages:volume:side:type{side=\"send\",type=\"queries\"}[$__interval])  OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:volume:queries:send:sum[$__range]) OR on() vector(0))",
           "legendFormat": "Queries",
           "refId": "D"
         },
         {
-          "expr": "sum by ()(rate(kubemq:messages:volume:side:type{side=\"send\",type=\"commands\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:volume:commands:send:sum[$__range]) OR on() vector(0))",
           "legendFormat": "Commands",
           "refId": "E"
         }
@@ -1176,27 +1177,27 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by ()(rate(kubemq:messages:count:side:type{side=\"receive\",type=\"events\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:count:events:receive:sum[$__range]) OR on() vector(0))",
           "legendFormat": "Events",
           "refId": "A"
         },
         {
-          "expr": "sum by ()(rate(kubemq:messages:count:side:type{side=\"receive\",type=\"events_store\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:count:events_store:receive:sum[$__range]) OR on() vector(0))",
           "legendFormat": "Events Store",
           "refId": "B"
         },
         {
-          "expr": "sum by ()(rate(kubemq:messages:count:side:type{side=\"receive\",type=\"queues\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:count:commands:receive:sum[$__range]) OR on() vector(0))",
           "legendFormat": "Queues",
           "refId": "C"
         },
         {
-          "expr": "sum by ()(rate(kubemq:messages:count:side:type{side=\"receive\",type=\"queries\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:count:commands:receive:sum[$__range]) OR on() vector(0))",
           "legendFormat": "Queries",
           "refId": "D"
         },
         {
-          "expr": "sum by ()(rate(kubemq:messages:count:side:type{side=\"receive\",type=\"commands\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:count:commands:receive:sum[$__range]) OR on() vector(0))",
           "legendFormat": "Commands",
           "refId": "E"
         }
@@ -1291,27 +1292,27 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by ()(rate(kubemq:messages:volume:side:type{side=\"receive\",type=\"events\"}[$__interval])  OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:volume:events:receive:sum[$__range]) OR on() vector(0))",
           "legendFormat": "Events",
           "refId": "A"
         },
         {
-          "expr": "sum by ()(rate(kubemq:messages:volume:side:type{side=\"receive\",type=\"events_store\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:volume:events_store:receive:sum[$__range]) OR on() vector(0))",
           "legendFormat": "Events Store",
           "refId": "B"
         },
         {
-          "expr": "sum by ()(rate(kubemq:messages:volume:side:type{side=\"receive\",type=\"queues\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:volume:queues:receive:sum[$__range]) OR on() vector(0))",
           "legendFormat": "Queues",
           "refId": "C"
         },
         {
-          "expr": "sum by ()(rate(kubemq:messages:volume:side:type{side=\"receive\",type=\"queries\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:volume:queries:receive:sum[$__range]) OR on() vector(0))",
           "legendFormat": "Queries",
           "refId": "D"
         },
         {
-          "expr": "sum by ()(rate(kubemq:messages:volume:side:type{side=\"receive\",type=\"commands\"}[$__interval])  OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:volume:commands:receive:sum[$__range]) OR on() vector(0))",
           "legendFormat": "Commands",
           "refId": "E"
         }
@@ -1448,7 +1449,8 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum by ()(rate(kubemq:messages:count:side:type{side=\"send\",type=\"events\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:count:events:send:sum[$__range]) OR on() vector(0))",
+          "instant": false,
           "refId": "A"
         }
       ],
@@ -1533,7 +1535,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum by ()(rate(kubemq:messages:volume:side:type{side=\"send\",type=\"events\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:volume:events:send:sum[$__interval]) OR on() vector(0))",
           "refId": "A"
         }
       ],
@@ -1618,7 +1620,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum by ()(rate(kubemq:messages:count:side:type{side=\"receive\",type=\"events\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:count:events:receive:sum[$__range]) OR on() vector(0))",
           "refId": "A"
         }
       ],
@@ -1703,7 +1705,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum by ()(rate(kubemq:messages:volume:side:type{side=\"receive\",type=\"events\"}[$__interval])  OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:count:events:receive:sum[$__range]) OR on() vector(0))",
           "refId": "A"
         }
       ],
@@ -2201,7 +2203,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum by ()(rate(kubemq:messages:count:side:type{side=\"send\",type=\"events_store\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:count:events_store:send:sum[$__range]) OR on() vector(0))",
           "refId": "A"
         }
       ],
@@ -2286,7 +2288,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum by ()(rate(kubemq:messages:volume:side:type{side=\"send\",type=\"events_store\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:volume:events_store:send:sum[$__range]) OR on() vector(0))",
           "refId": "A"
         }
       ],
@@ -2371,7 +2373,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum by ()(rate(kubemq:messages:count:side:type{side=\"receive\",type=\"events_store\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:count:events_store:receive:sum[$__range]) OR on() vector(0))",
           "refId": "A"
         }
       ],
@@ -2456,7 +2458,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum by ()(rate(kubemq:messages:volume:side:type{side=\"receive\",type=\"events_store\"}[$__interval])  OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:volume:events_store:receive:sum[$__range]) OR on() vector(0))",
           "refId": "A"
         }
       ],
@@ -2853,7 +2855,7 @@
       ],
       "targets": [
         {
-          "expr": "sum(rate(kubemq_messages_count{type=\"events_store\"}[$__range])) by(channel,side) ",
+          "expr": "sum(kubemq_messages_count{type=\"events_store\"}) by(channel,side) ",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -2861,7 +2863,7 @@
           "refId": "B"
         },
         {
-          "expr": "sum(rate(kubemq_messages_volume{type=\"events_store\"}[$__range])) by(channel,side) ",
+          "expr": "sum(kubemq_messages_volume{type=\"events_store\"}) by(channel,side) ",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -2954,7 +2956,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum by ()(rate(kubemq:messages:count:side:type{side=\"send\",type=\"queues\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:count:queues:send:sum[$__range]) OR on() vector(0))",
           "refId": "A"
         }
       ],
@@ -3039,7 +3041,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum by ()(rate(kubemq:messages:volume:side:type{side=\"send\",type=\"queues\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:volume:queues:send:sum[$__range]) OR on() vector(0))",
           "refId": "A"
         }
       ],
@@ -3124,7 +3126,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum by ()(rate(kubemq:messages:count:side:type{side=\"receive\",type=\"queues\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:count:queues:receive:sum[$__range]) OR on() vector(0))",
           "instant": false,
           "refId": "A"
         }
@@ -3210,7 +3212,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum by ()(rate(kubemq:messages:volume:side:type{side=\"receive\",type=\"queues\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:volume:queues:receive:sum[$__range]) OR on() vector(0))",
           "refId": "A"
         }
       ],
@@ -3725,7 +3727,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum by ()(rate(kubemq:messages:count:side:type{side=\"send\",type=\"queries\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:count:queries:send:sum[$__range]) OR on() vector(0))",
           "refId": "A"
         }
       ],
@@ -3810,7 +3812,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum by ()(rate(kubemq:messages:volume:side:type{side=\"send\",type=\"queries\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:volume:queries:send:sum[$__range]) OR on() vector(0))",
           "refId": "A"
         }
       ],
@@ -3895,7 +3897,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum by ()(rate(kubemq:messages:count:side:type{side=\"receive\",type=\"queries\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:count:queries:receive:sum[$__range]) OR on() vector(0))",
           "refId": "A"
         }
       ],
@@ -3980,7 +3982,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum by ()(rate(kubemq:messages:volume:side:type{side=\"receive\",type=\"queries\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:volume:queries:receive:sum[$__range]) OR on() vector(0))",
           "refId": "A"
         }
       ],
@@ -4495,7 +4497,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum by ()(rate(kubemq:messages:count:side:type{side=\"send\",type=\"commands\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:count:commands:send:sum[$__range]) OR on() vector(0))",
           "refId": "A"
         }
       ],
@@ -4580,7 +4582,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum by ()(rate(kubemq:messages:volume:side:type{side=\"send\",type=\"commands\"}[$__interval])  OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:volume:commands:send:sum[$__range]) OR on() vector(0))",
           "refId": "A"
         }
       ],
@@ -4665,7 +4667,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum by ()(rate(kubemq:messages:count:side:type{side=\"receive\",type=\"commands\"}[$__interval]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:count:commands:receive:sum[$__range]) OR on() vector(0))",
           "refId": "A"
         }
       ],
@@ -4750,7 +4752,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum by ()(rate(kubemq:messages:volume:side:type{side=\"receive\",type=\"commands\"}[$__interval])  OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:volume:commands:receive:sum[$__range]) OR on() vector(0))",
           "refId": "A"
         }
       ],
@@ -5194,7 +5196,7 @@
     "list": []
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -5214,5 +5216,5 @@
   "timezone": "",
   "title": "Kubemq Dashboard",
   "uid": "kubemqdashboard",
-  "version": 1
+  "version": 26
 }
