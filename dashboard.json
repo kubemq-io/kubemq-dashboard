@@ -2,7 +2,6 @@
   "annotations": {
     "list": [
       {
-        "$$hashKey": "object:7",
         "builtIn": 1,
         "datasource": "-- Grafana --",
         "enable": true,
@@ -17,6 +16,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
+  "id": 1,
   "links": [],
   "panels": [
     {
@@ -69,7 +69,7 @@
         "justifyMode": "auto",
         "orientation": "auto"
       },
-      "pluginVersion": "6.7.2",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "max_over_time(kubemq:messages:count:events:sum[$__range])-min_over_time(kubemq:messages:count:events:sum[$__range])",
@@ -116,7 +116,7 @@
         "justifyMode": "auto",
         "orientation": "auto"
       },
-      "pluginVersion": "6.7.2",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "max_over_time(kubemq:messages:count:events_store:sum[$__range])-min_over_time(kubemq:messages:count:events_store:sum[$__range])",
@@ -163,7 +163,7 @@
         "justifyMode": "auto",
         "orientation": "auto"
       },
-      "pluginVersion": "6.7.2",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "max_over_time(kubemq:messages:count:queues:sum[$__range])-min_over_time(kubemq:messages:count:queues:sum[$__range])",
@@ -211,7 +211,7 @@
         "justifyMode": "auto",
         "orientation": "auto"
       },
-      "pluginVersion": "6.7.2",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "max_over_time(kubemq:messages:count:queries:sum[$__range])-min_over_time(kubemq:messages:count:queries:sum[$__range])",
@@ -258,7 +258,7 @@
         "justifyMode": "auto",
         "orientation": "auto"
       },
-      "pluginVersion": "6.7.2",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "max_over_time(kubemq:messages:count:commands:sum[$__range])-min_over_time(kubemq:messages:count:commands:sum[$__range])",
@@ -305,7 +305,7 @@
         "justifyMode": "auto",
         "orientation": "auto"
       },
-      "pluginVersion": "6.7.2",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "max_over_time(kubemq:messages:count:responses:sum[$__range])-min_over_time(kubemq:messages:count:responses:sum[$__range])",
@@ -354,7 +354,7 @@
         "justifyMode": "auto",
         "orientation": "auto"
       },
-      "pluginVersion": "6.7.2",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "max_over_time(kubemq:messages:volume:events:sum[$__range])-min_over_time(kubemq:messages:volume:events:sum[$__range])",
@@ -402,7 +402,7 @@
         "justifyMode": "auto",
         "orientation": "auto"
       },
-      "pluginVersion": "6.7.2",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "max_over_time(kubemq:messages:volume:events_store:sum[$__range])-min_over_time(kubemq:messages:volume:events_store:sum[$__range])",
@@ -450,7 +450,7 @@
         "justifyMode": "auto",
         "orientation": "auto"
       },
-      "pluginVersion": "6.7.2",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "max_over_time(kubemq:messages:volume:queues:sum[$__range])-min_over_time(kubemq:messages:volume:queues:sum[$__range])",
@@ -498,7 +498,7 @@
         "justifyMode": "auto",
         "orientation": "auto"
       },
-      "pluginVersion": "6.7.2",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "max_over_time(kubemq:messages:volume:queries:sum[$__range])-min_over_time(kubemq:messages:volume:queries:sum[$__range])",
@@ -546,7 +546,7 @@
         "justifyMode": "auto",
         "orientation": "auto"
       },
-      "pluginVersion": "6.7.2",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "max_over_time(kubemq:messages:volume:commands:sum[$__range])-min_over_time(kubemq:messages:volume:commands:sum[$__range])",
@@ -594,7 +594,7 @@
         "justifyMode": "auto",
         "orientation": "auto"
       },
-      "pluginVersion": "6.7.2",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "max_over_time(kubemq:messages:volume:responses:sum[$__range])-min_over_time(kubemq:messages:volume:responses:sum[$__range])",
@@ -643,7 +643,7 @@
         "justifyMode": "auto",
         "orientation": "auto"
       },
-      "pluginVersion": "6.7.2",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "max_over_time(kubemq:messages:errors:events:sum[$__range])-min_over_time(kubemq:messages:errors:events:sum[$__range])",
@@ -692,7 +692,7 @@
         "justifyMode": "auto",
         "orientation": "auto"
       },
-      "pluginVersion": "6.7.2",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "max_over_time(kubemq:messages:errors:events_store:sum[$__range])-min_over_time(kubemq:messages:errors:events_store:sum[$__range])",
@@ -741,7 +741,7 @@
         "justifyMode": "auto",
         "orientation": "auto"
       },
-      "pluginVersion": "6.7.2",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "max_over_time(kubemq:messages:errors:queues:sum[$__range])-min_over_time(kubemq:messages:errors:queues:sum[$__range])",
@@ -790,7 +790,7 @@
         "justifyMode": "auto",
         "orientation": "auto"
       },
-      "pluginVersion": "6.7.2",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "max_over_time(kubemq:messages:errors:queries:sum[$__range])-min_over_time(kubemq:messages:errors:queries:sum[$__range])",
@@ -839,7 +839,7 @@
         "justifyMode": "auto",
         "orientation": "auto"
       },
-      "pluginVersion": "6.7.2",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "max_over_time(kubemq:messages:errors:commands:sum[$__range])-min_over_time(kubemq:messages:errors:commands:sum[$__range]) ",
@@ -888,7 +888,7 @@
         "justifyMode": "auto",
         "orientation": "auto"
       },
-      "pluginVersion": "6.7.2",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "max_over_time(kubemq:messages:errors:responses:sum[$__range])-min_over_time(kubemq:messages:errors:responses:sum[$__range])",
@@ -1188,12 +1188,11 @@
         },
         {
           "expr": "sum by ()(irate(kubemq:messages:count:queues:receive:sum[$__range]) OR on() vector(0))",
-          "interval": "",
           "legendFormat": "Queues",
           "refId": "C"
         },
         {
-          "expr": "sum by ()(irate(kubemq:messages:count:commands:receive:sum[$__range]) OR on() vector(0))",
+          "expr": "sum by ()(irate(kubemq:messages:count:queries:receive:sum[$__range]) OR on() vector(0))",
           "legendFormat": "Queries",
           "refId": "D"
         },
@@ -1417,6 +1416,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "pluginVersion": "6.6.2",
       "postfix": "  Msg/Sec",
       "postfixFontSize": "80%",
@@ -1511,6 +1511,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "pluginVersion": "6.6.2",
       "postfix": "",
       "postfixFontSize": "30%",
@@ -1595,6 +1596,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "pluginVersion": "6.6.2",
       "postfix": "  Msg/Sec",
       "postfixFontSize": "70%",
@@ -1679,6 +1681,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "pluginVersion": "6.6.2",
       "postfix": "",
       "postfixFontSize": "30%",
@@ -1734,6 +1737,7 @@
       },
       "id": 92,
       "links": [],
+      "options": {},
       "pageSize": null,
       "scroll": true,
       "showHeader": true,
@@ -1933,6 +1937,7 @@
       },
       "id": 129,
       "links": [],
+      "options": {},
       "pageSize": null,
       "scroll": true,
       "showHeader": true,
@@ -2174,6 +2179,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "pluginVersion": "6.6.2",
       "postfix": "  Msg/Sec",
       "postfixFontSize": "70%",
@@ -2258,6 +2264,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "pluginVersion": "6.6.2",
       "postfix": "",
       "postfixFontSize": "30%",
@@ -2342,6 +2349,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "pluginVersion": "6.6.2",
       "postfix": "  Msg/Sec",
       "postfixFontSize": "70%",
@@ -2426,6 +2434,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "pluginVersion": "6.6.2",
       "postfix": "",
       "postfixFontSize": "30%",
@@ -2481,6 +2490,7 @@
       },
       "id": 134,
       "links": [],
+      "options": {},
       "pageSize": null,
       "scroll": true,
       "showHeader": true,
@@ -2680,6 +2690,7 @@
       },
       "id": 135,
       "links": [],
+      "options": {},
       "pageSize": null,
       "scroll": true,
       "showHeader": true,
@@ -2921,6 +2932,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "pluginVersion": "6.6.2",
       "postfix": "  Msg/Sec",
       "postfixFontSize": "70%",
@@ -3005,6 +3017,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "pluginVersion": "6.6.2",
       "postfix": "",
       "postfixFontSize": "80%",
@@ -3089,6 +3102,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "pluginVersion": "6.6.2",
       "postfix": "  Msg/Sec",
       "postfixFontSize": "70%",
@@ -3174,6 +3188,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "pluginVersion": "6.6.2",
       "postfix": "",
       "postfixFontSize": "80%",
@@ -3229,6 +3244,7 @@
       },
       "id": 170,
       "links": [],
+      "options": {},
       "pageSize": null,
       "scroll": true,
       "showHeader": true,
@@ -3445,6 +3461,7 @@
       },
       "id": 139,
       "links": [],
+      "options": {},
       "pageSize": null,
       "scroll": true,
       "showHeader": true,
@@ -3686,6 +3703,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "pluginVersion": "6.6.2",
       "postfix": "  Msg/Sec",
       "postfixFontSize": "70%",
@@ -3770,6 +3788,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "pluginVersion": "6.6.2",
       "postfix": "",
       "postfixFontSize": "80%",
@@ -3854,6 +3873,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "pluginVersion": "6.6.2",
       "postfix": "  Msg/Sec",
       "postfixFontSize": "70%",
@@ -3938,6 +3958,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "pluginVersion": "6.6.2",
       "postfix": "",
       "postfixFontSize": "80%",
@@ -3993,6 +4014,7 @@
       },
       "id": 144,
       "links": [],
+      "options": {},
       "pageSize": null,
       "scroll": true,
       "showHeader": true,
@@ -4209,6 +4231,7 @@
       },
       "id": 147,
       "links": [],
+      "options": {},
       "pageSize": null,
       "scroll": true,
       "showHeader": true,
@@ -4450,6 +4473,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "pluginVersion": "6.6.2",
       "postfix": "  Msg/Sec",
       "postfixFontSize": "70%",
@@ -4534,6 +4558,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "pluginVersion": "6.6.2",
       "postfix": "",
       "postfixFontSize": "80%",
@@ -4618,6 +4643,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "pluginVersion": "6.6.2",
       "postfix": "  Msg/Sec",
       "postfixFontSize": "70%",
@@ -4702,6 +4728,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "pluginVersion": "6.6.2",
       "postfix": "",
       "postfixFontSize": "80%",
@@ -4757,6 +4784,7 @@
       },
       "id": 146,
       "links": [],
+      "options": {},
       "pageSize": null,
       "scroll": true,
       "showHeader": true,
@@ -4973,6 +5001,7 @@
       },
       "id": 145,
       "links": [],
+      "options": {},
       "pageSize": null,
       "scroll": true,
       "showHeader": true,
@@ -5167,7 +5196,7 @@
     "list": []
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {
@@ -5187,8 +5216,5 @@
   "timezone": "",
   "title": "Kubemq Dashboard",
   "uid": "kubemqdashboard",
-  "variables": {
-    "list": []
-  },
-  "version": 1
+  "version": 27
 }
